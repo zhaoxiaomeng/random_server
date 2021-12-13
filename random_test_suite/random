@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#/root/random client $SSLVPN服务端IP $SSLVPN服务端端口 $随机数大小 $随机数保存的文件
+echo /root/random client SSLVPN服务端IP SSLVPN服务端端口 随机数大小 随机数保存的文件
+echo /root/random server 侦听IP 侦听端口 随机数大小 随机数保存的文件
+
+mode=0;
+if [ "$1" == 'client' ]; then
+	mode=0;
+	/root/gather_rand -a $2 -p $3 -s $4 -r $5 -m 0 -P 20
+else
+	mode=1;
+	/root/openssl gmvpn_random -m $mode -a $2 -p $3 -i $4 -r $5 -d >/dev/null
+fi	
+
